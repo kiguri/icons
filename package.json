@@ -6,7 +6,8 @@
   "author": "kiguri",
   "license": "MIT",
   "files": [
-    "README.md"
+    "README.md",
+    "icons/"
   ],
   "scripts": {
     "prepublishOnly": "pnpm run build",
