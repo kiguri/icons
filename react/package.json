@@ -1,1 +1,21 @@
-{}
+{
+  "name": "@kiguri-icons/react",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/huyha1408/icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyha1408/icons.git"
+  },
+  "files": [
+    "icons"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">= 16"
+  }
+}

@@ -52,11 +52,11 @@ let transform = {
   },
 }
 
-async function getIcons(style) {
-  let files = await fs.readdir(`./optimized/${style}`)
+async function getIcons() {
+  let files = await fs.readdir('./icons')
   return Promise.all(
     files.map(async (file) => ({
-      svg: await fs.readFile(`./optimized/${style}/${file}`, 'utf8'),
+      svg: await fs.readFile(`./icons/${file}`, 'utf8'),
       componentName: `${camelcase(file.replace(/\.svg$/, ''), {
         pascalCase: true,
       })}Icon`,
@@ -85,13 +85,13 @@ async function ensureWriteJson(file, json) {
   await ensureWrite(file, JSON.stringify(json, null, 2))
 }
 
-async function buildIcons(package, style, format) {
-  let outDir = `./${package}/${style}`
+async function buildIcons(package, format) {
+  let outDir = `./${package}/icons`
   if (format === 'esm') {
     outDir += '/esm'
   }
 
-  let icons = await getIcons(style)
+  let icons = await getIcons()
 
   await Promise.all(
     icons.flatMap(async ({ componentName, svg }) => {
@@ -121,20 +121,13 @@ async function main(package) {
 
   console.log(`Building ${package} package...`)
 
-  await Promise.all([
-    rimraf(`./${package}/outline/*`),
-    rimraf(`./${package}/solid/*`),
-  ])
+  await rimraf(`./${package}/icons/*`)
 
   await Promise.all([
-    buildIcons(package, 'solid', 'esm'),
-    buildIcons(package, 'solid', 'cjs'),
-    buildIcons(package, 'outline', 'esm'),
-    buildIcons(package, 'outline', 'cjs'),
-    ensureWriteJson(`./${package}/outline/package.json`, cjsPackageJson),
-    ensureWriteJson(`./${package}/outline/esm/package.json`, esmPackageJson),
-    ensureWriteJson(`./${package}/solid/package.json`, cjsPackageJson),
-    ensureWriteJson(`./${package}/solid/esm/package.json`, esmPackageJson),
+    buildIcons(package, 'esm'),
+    buildIcons(package, 'cjs'),
+    ensureWriteJson(`./${package}/icons/package.json`, cjsPackageJson),
+    ensureWriteJson(`./${package}/icons/esm/package.json`, esmPackageJson),
   ])
 
   return console.log(`Finished building ${package} package.`)
