@@ -1,0 +1,25 @@
+{
+  "name": "kiguri-icons",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "kiguri",
+  "license": "MIT",
+  "files": [
+    "README.md"
+  ],
+  "scripts": {
+    "build": "pnpm run build-react && pnpm run build-vue",
+    "build-react": "node ./scripts/build.js react",
+    "build-vue": "node ./scripts/build.js vue"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/plugin-transform-react-jsx": "^7.17.12",
+    "@svgr/core": "^6.2.1",
+    "@vue/compiler-dom": "^3.2.35",
+    "camelcase": "^6.3.0",
+    "rimraf": "^3.0.2",
+    "svgo": "^2.8.0"
+  }
+}
