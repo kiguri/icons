@@ -54,6 +54,7 @@ let transform = {
 
 async function getIcons() {
   let files = await fs.readdir('./icons')
+  files = files.filter((f) => f.endsWith('.svg'))
   return Promise.all(
     files.map(async (file) => ({
       svg: await fs.readFile(`./icons/${file}`, 'utf8'),
