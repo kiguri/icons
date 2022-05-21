@@ -7,7 +7,9 @@
   "license": "MIT",
   "files": [
     "README.md",
-    "icons/"
+    "icons/",
+    "react/icons",
+    "vue/icons"
   ],
   "scripts": {
     "prepublishOnly": "pnpm run build",
